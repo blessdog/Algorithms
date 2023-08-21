@@ -9,4 +9,27 @@ Note that empty arrays and arrays of one element are monotonic.
 '''
 
 def isMonotonic(array):
+    # Handle arrays of size 0 or 1
+    if len(array) <= 1:
+        return True
+
+    # Determine the direction
+    direction = array[1] - array[0]
+    for i in range(2, len(array)):
+        # If direction hasn't been set, find the next difference
+        if direction == 0:
+            direction = array[i] - array[i - 1]
+            continue
+
+        # If direction changes, return False
+        if hasDirectionChanged(direction, array[i - 1], array[i]):
+            return False
+
+    return True
+
+def hasDirectionChanged(direction, previousInt, currentInt):
+    difference = currentInt - previousInt
+    if direction > 0:
+        return difference < 0
+    return difference > 0
 
