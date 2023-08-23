@@ -22,6 +22,20 @@ def isMonotonic(array):
     if len(array) <= 1:
         return True
 
+    # Determine the direction
     direction = array[1] - array[0]
-    for i in range(2, len(array))
+    for i in range(2, len(array)):
+        # If direction hasn't been set, find next direction. 
+        if direction == 0:
+            direction = array[i] - array[i - 1]
+            continue
 
+        # If direction changes, return False
+        if hasDirectionChanged(direction, array[i - 1], array[i]):
+            return False
+    
+    return True
+
+def hasDirectionChanged(direction, previousInt, currentInt):
+    difference = currentInt - previousInt:
+    if direction > 0:
