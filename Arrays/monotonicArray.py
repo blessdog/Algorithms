@@ -15,7 +15,7 @@ To determine if an array is monotonic, we can take the following approach:
 3. Once the direction is determined, scan the rest of the array to see if the direction ever changes.
 '''
 
-
+# O(n) time | O(1) space
 
 def isMonotonic(array):
     # Handle arrays of size 0 or 1
@@ -31,11 +31,14 @@ def isMonotonic(array):
             continue
 
         # If direction changes, return False
-        if hasDirectionChanged(direction, array[i - 1], array[i]):
+        if breaksDirection(direction, array[i - 1], array[i]):
             return False
     
     return True
 
-def hasDirectionChanged(direction, previousInt, currentInt):
-    difference = currentInt - previousInt:
+def breaksDirection(direction, previousInt, currentInt):
+    difference = currentInt - previousInt
     if direction > 0:
+        return difference < 0
+    return difference > 0 
+
